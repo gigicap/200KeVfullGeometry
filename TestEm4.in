@@ -1,0 +1,58 @@
+# $Id: TestEm4.in 75839 2013-11-06 17:27:26Z gcosmo $
+#
+# Macro file for "TestEm4.cc"
+# 
+# (can be run in batch, without graphic)
+#
+#/control/verbose  2
+#/run/verbose 2
+#
+/run/printProgress 1
+#
+/control/alias name NoPiomboNoTarget5MeVSeed
+/control/alias seed1 2
+/control/alias seed2 2
+/random/setSeeds {seed1} {seed2}
+
+/analysis/setFileName {name}{seed1}_{seed2}x1
+/run/beamOn 5
+/analysis/setFileName {name}{seed1}_{seed2}x2
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x3
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x4
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x5
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x6
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x7
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x8
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x9
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x10
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x11
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x12
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x13
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x14
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x15
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x16
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x17
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x18
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x19
+/run/beamOn 500
+/analysis/setFileName {name}{seed1}_{seed2}x20
+/run/beamOn 500
+
+
