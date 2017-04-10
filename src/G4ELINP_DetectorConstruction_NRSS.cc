@@ -346,7 +346,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
 
     		//mother box placement
  			G4RotationMatrix rotm = G4RotationMatrix();
- 			 		rotm.rotateY(-scattAngle*deg);//a+45 con ultimo -
+ 			 		rotm.rotateY((90+scattAngle)*deg);//a+45 con ultimo -
  		G4double detectorDistanceX = (detectorDistance+mboxZ*0.5)*cos(scattAngle*CLHEP::twopi/360);
  		G4double detectorDistanceZ = (detectorDistance+mboxZ*0.5)*sin(scattAngle*CLHEP::twopi/360);
  			G4ThreeVector position = G4ThreeVector(targetX-detectorDistanceX, targetY, targetZ+detectorDistanceZ);  //a+45 con ultimo + 
@@ -396,7 +396,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
     
     		//placement of L1
     		new G4PVPlacement(0,        
-                    	G4ThreeVector(-sizex/2+centralSizex/2,centralSizey/2 + sizey/2 ,translZ+depth/2-2),
+                    	G4ThreeVector(-sizex/2+centralSizex/2,centralSizey/2 + sizey/2 ,translZ+depth/2-4),
                       	L1Logic,     
                       	"L1Detector",   
                       	detectorLogic,  
@@ -405,7 +405,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
                       	checkOverlaps); 
     		//placement of L2
     		new G4PVPlacement(0,        
-                      	G4ThreeVector(+sizex/2+centralSizex/2,-centralSizey/2 +sizey/2 ,translZ +depth/2-2),
+                      	G4ThreeVector(+sizex/2+centralSizex/2,-centralSizey/2 +sizey/2 ,translZ +depth/2-4),
                       	L2Logic,     
                       	"L2Detector",             
                       	detectorLogic,              
@@ -414,7 +414,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
                       	checkOverlaps);          
     		//placement of L3
     		new G4PVPlacement(0,        
-                      	G4ThreeVector(+sizex/2-centralSizex/2,-centralSizey/2 - sizey/2 ,translZ +depth/2-2),
+                      	G4ThreeVector(+sizex/2-centralSizex/2,-centralSizey/2 - sizey/2 ,translZ +depth/2-4),
                       	L3Logic,     
                       	"L3Detector",              
                       	detectorLogic,              
@@ -423,7 +423,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
                       	checkOverlaps);         
     		//placement of L4
     		new G4PVPlacement(0,        
-                      	G4ThreeVector(-sizex/2-centralSizex/2,+centralSizey/2 -sizey/2 ,translZ +depth/2-2),
+                      	G4ThreeVector(-sizex/2-centralSizex/2,+centralSizey/2 -sizey/2 ,translZ +depth/2-4),
                       	L4Logic,    
                       	"L4Detector",              
                       	detectorLogic,              
@@ -498,6 +498,10 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
         G4SubtractionSolid *PbholeSolid = new G4SubtractionSolid("PbholeSolid", PbholeBox, PbholeHole);           
 
         G4LogicalVolume *PbholeLogic = new G4LogicalVolume(PbholeSolid, PbCoat_mat, "PbholeLogic"); 
+	
+	G4VisAttributes* HoleVisAttribute = new G4VisAttributes(G4Colour(0.,1.,1.));
+			HoleVisAttribute->SetForceSolid(true);
+			PbholeLogic->SetVisAttributes(HoleVisAttribute); 
           
         //PbholeLogic->SetVisAttributes(fNRSSScreenVisAttribute);  
                     
