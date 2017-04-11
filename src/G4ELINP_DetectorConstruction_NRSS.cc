@@ -187,6 +187,11 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
     		G4double centralSizex = 3 * cm;
     		G4double centralSizey = 3 * cm;
     		G4double centralDepth = 6 * cm;
+		
+	//rivelatore SIlicio
+		G4double SiRadius = 0.5*cm;
+		G4double SiTh = 0.5*mm;
+		
 
         //PBscreen davanti
         G4double pbholeXY=mboxXY;
@@ -262,7 +267,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
  			
  		//	if (bNRSStarget == true) {
  				//target placement
- 			//frame placement
+ 			//frame placementG4Material* target_mat = nist->FindOrBuildMaterial("G4_Al");
  			new G4PVPlacement(0,         
                 	G4ThreeVector(0.,0.,targetZ),    
                    	logicFrame,             
@@ -378,6 +383,26 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
                       false,                
                       0,                    
                       checkOverlaps);      
+		
+		//SiliconDetector for 200keV
+		G4Tubs* solidSi = new G4Tubs("Si", 0, SiRadius, SiTh/2, 0*deg, 360*deg); 
+		G4Material* Si_mat = nist->FindOrBuildMaterial("G4_Si");
+
+ 			G4LogicalVolume* logicSi = new G4LogicalVolume(solidSi, Si_mat, "Si");  //!!!!
+ 			
+ 			G4VisAttributes* SiVisAttribute = new G4VisAttributes(G4Colour(1.,0.,0.));
+			SiVisAttribute->SetForceSolid(true);
+			logicSi->SetVisAttributes(SiVisAttribute);
+ 			
+ 			new G4PVPlacement(0,         
+                	G4ThreeVector(-mboxXY/2+4*cm,0.,mboxZ/2-1*mm),    
+                   	logicSi,             
+                   	"Si",                
+                   	detectorLogic,            
+                   	false,                  
+                   	0,                     
+                   	checkOverlaps);
+		
 
     		//The other detectors (BaF2)
     		G4Box * otherSolid = new G4Box("otherSolid",sizex/2,sizey/2,depth/2);
@@ -493,7 +518,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
 
 
         //Pbhole
-        G4Box * PbholeBox = new G4Box("PbholeBox",pbholeXY/2, pbholeXY/2, pbholeZ/2);
+      /*  G4Box * PbholeBox = new G4Box("PbholeBox",pbholeXY/2, pbholeXY/2, pbholeZ/2);
         G4Tubs * PbholeHole = new G4Tubs("PbholeHole",0., 1*cm, pbholeZ/2, 0*CLHEP::deg, 360*CLHEP::deg);
         G4SubtractionSolid *PbholeSolid = new G4SubtractionSolid("PbholeSolid", PbholeBox, PbholeHole);           
 
@@ -511,7 +536,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
     //fNRSSlateralScreenRotm->rotateY(-30*deg);
           
         G4VPhysicalVolume* PbholePhysical = new G4PVPlacement(PbholeRotm, PbholePositionVector, PbholeLogic, "PbholePhysical", detectorLogic, false, 0); 
-          
+          */
 
 			
 			//--------------------------------------------------------------------------------------------------

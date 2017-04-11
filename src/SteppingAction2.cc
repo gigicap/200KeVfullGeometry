@@ -378,7 +378,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
 			}
     }
 
-    if(volume->GetName() == "Target"){
+    if(volume->GetName() == "Si"){
 			G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
         	G4double EdepStep = aStep->GetTotalEnergyDeposit();
 			fEventAction->addDetectorEdep(5,EdepStep);							//tutta l'energia di tutti gli step nel rivelatore

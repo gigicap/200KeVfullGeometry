@@ -55,7 +55,7 @@ RunAction::RunAction()
   analysisManager->CreateNtupleDColumn("L2");
   analysisManager->CreateNtupleDColumn("L3");
   analysisManager->CreateNtupleDColumn("L4");
-  analysisManager->CreateNtupleDColumn("Target");
+  analysisManager->CreateNtupleDColumn("Silicon");
   analysisManager->CreateNtupleIColumn("CerenkovCentral");
   analysisManager->CreateNtupleIColumn("CerenkovL1");
   analysisManager->CreateNtupleIColumn("CerenkovL2");
@@ -172,7 +172,7 @@ RunAction::RunAction()
   analysisManager->CreateNtupleIColumn("EventID");
   analysisManager->FinishNtuple();
 
-  analysisManager->CreateNtuple("Target", "Direction of particle that hits Target");
+  analysisManager->CreateNtuple("Silicon", "Direction of particle that hits Silicon detector");
   analysisManager->CreateNtupleDColumn("KinEnergy");
   analysisManager->CreateNtupleDColumn("Time");
   analysisManager->CreateNtupleIColumn("Particle");
