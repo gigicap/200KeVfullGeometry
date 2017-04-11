@@ -58,7 +58,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
     : G4VUserPrimaryGeneratorAction(),fParticleGun(0),
       nsegments(10)
 {
-    G4int n_particle = 100;
+    G4int n_particle = 100000;
     fParticleGun  = new G4ParticleGun(n_particle);
 
     // default particle kinematic

@@ -162,8 +162,8 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
   			G4double EdgeDistance = 1.*mm;	//introdotta per problemi di scoring nell'envelope BOX
   		        G4double pipeZ = fNRSSEnvelopeLength - 2.*EdgeDistance; 
   			//target + frame 
-  		//	G4double frameTh = 2.5*mm;
-      G4double frameTh = 0.25*mm;
+  		G4double frameTh = 2.5*mm;
+      //G4double frameTh = 0.25*mm;
  			G4double targetTh = frameTh;	//TargetTh must be less then frameTh 
  			G4double targetDia = 2*cm;
 
