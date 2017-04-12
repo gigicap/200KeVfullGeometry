@@ -250,7 +250,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
  			//G4Element* C13  = new G4Element("Carbon13", "C", ZC13, AC13);
  			//G4double densityC13 = 2.03*g/cm3;                                 
  			//G4Material* target_mat = new G4Material("Target", densityC13, 1);
-			G4Material* target_mat = nist->FindOrBuildMaterial("G4_Al");
+			G4Material* target_mat = nist->FindOrBuildMaterial("G4_Al");  //prova!!!
 			//target_mat->AddElement(C13, 1.);
 
  			G4Tubs* solidFrame = new G4Tubs("Frame", 0, pipeDia/2-pipeTh, frameTh/2, 0*deg, 360*deg); 
@@ -287,6 +287,43 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
                    	0,                    
                    	checkOverlaps);     
             //}         
+
+        //cameretta target (6mm di Al)
+        G4double fNRSSChamberOutdia = 60*mm;
+        G4double fNRSSChamberTh = 6*mm;
+        G4double fNRSSChamberIndia = fNRSSChamberOutdia-2*fNRSSChamberTh;
+        G4double fNRSSChamberOutLength = 60*mm;
+        G4double fNRSSChamberInLength = fNRSSChamberOutLength-4*mm;
+
+        G4Tubs* fNRSSChamberOutSolid = new G4Tubs("NRSSChamberOutSolid",
+                                      0.,
+                                      fNRSSChamberOutdia*0.5,
+                                      fNRSSChamberOutLength*0.5,
+                                      0*CLHEP::deg,
+                                      360*CLHEP::deg);
+                                      
+      G4Tubs* fNRSSChamberInSolid = new G4Tubs("NRSSChamberInSolid",
+                                      0.,
+                                      fNRSSChamberIndia,
+                                      fNRSSChamberInLength,
+                                      0*CLHEP::deg,
+                                      360*CLHEP::deg);
+                                      
+       G4SubtractionSolid* fNRSSChamberSolid = new G4SubtractionSolid("NRSSChamberSolid", fNRSSChamberOutSolid, fNRSSChamberInSolid); 
+
+       G4LogicalVolume* fNRSSChamberLogic = new G4LogicalVolume(fNRSSChamberSolid, frame_mat, "NRSSChamberLogic");
+            
+        G4VisAttributes* fNRSSChamberVisAttribute = new G4VisAttributes(G4Colour(1.,1.,1.));
+        fNRSSChamberVisAttribute->SetForceSolid(true);     
+        fNRSSChamberLogic->SetVisAttributes(fNRSSChamberVisAttribute);  
+      
+        G4ThreeVector fNRSSChamberPositionVector = G4ThreeVector(0., targetY , targetZ);
+          
+        G4RotationMatrix* fNRSSChamberRotm = new G4RotationMatrix(0.,0.,0.);
+        fNRSSChamberRotm->rotateX(90*deg);
+          
+        new G4PVPlacement(fNRSSChamberRotm, fNRSSChamberPositionVector, fNRSSChamberLogic, "fNRSSChamberPhysical", fNRSSEnvelopeLogic, false, 0); 
+                
 
   			//********************************
     		// Detector Box 
@@ -418,7 +455,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
 			L2Logic->SetVisAttributes(otherVisAttribute); 
 			L3Logic->SetVisAttributes(otherVisAttribute); 
 			L4Logic->SetVisAttributes(otherVisAttribute); 
-    
+   /* 
     		//placement of L1
     		new G4PVPlacement(0,        
                     	G4ThreeVector(-sizex/2+centralSizex/2,centralSizey/2 + sizey/2 ,translZ+depth/2-4),
@@ -455,7 +492,7 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
                       	false,                   
                       	0,                       
                       	checkOverlaps);       
-
+*/
     		//inner steel box
     		G4Box* innerSteelOuterBox = new G4Box("innerSteelOuterBox",insteelXY/2, insteelXY/2, mboxZ/2);
     		G4Box* innerSteelInnerBox = new G4Box("innerSteelInnerBox",(insteelXY)/2-steelTh, (insteelXY)/2-steelTh, mboxZ/2);
