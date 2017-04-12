@@ -304,12 +304,17 @@ G4VPhysicalVolume* G4ELINP_DetectorConstruction_NRSS::Construct()
                                       
       G4Tubs* fNRSSChamberInSolid = new G4Tubs("NRSSChamberInSolid",
                                       0.,
-                                      fNRSSChamberIndia,
-                                      fNRSSChamberInLength,
+                                      fNRSSChamberIndia*0.5,
+                                      fNRSSChamberInLength*0.5,
                                       0*CLHEP::deg,
                                       360*CLHEP::deg);
                                       
-       G4SubtractionSolid* fNRSSChamberSolid = new G4SubtractionSolid("NRSSChamberSolid", fNRSSChamberOutSolid, fNRSSChamberInSolid); 
+       G4SubtractionSolid* fNRSSChamberSolid1 = new G4SubtractionSolid("NRSSChamberSolid1", fNRSSChamberOutSolid, fNRSSChamberInSolid); 
+       
+       
+       G4Box *excludebp = new G4Box("excludebp",pipeDia/2-1.3*cm,10*cm,pipeDia/2-1.3*cm);
+       
+      G4SubtractionSolid* fNRSSChamberSolid = new G4SubtractionSolid("NRSSChamberSolid", fNRSSChamberSolid1, excludebp); 
 
        G4LogicalVolume* fNRSSChamberLogic = new G4LogicalVolume(fNRSSChamberSolid, frame_mat, "NRSSChamberLogic");
             
